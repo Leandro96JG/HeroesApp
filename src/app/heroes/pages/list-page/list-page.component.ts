@@ -1,0 +1,23 @@
+import { Component, OnInit } from '@angular/core';
+import { Hero } from '../../interfaces/hero.interface';
+import { HeroesService } from '../../services/heroes.service';
+
+@Component({
+  selector: 'app-list-page',
+  templateUrl: './list-page.component.html',
+  styleUrl: './list-page.component.css'
+})
+export class ListPageComponent implements OnInit {
+
+  public heroes:Hero[]=[];
+
+  //para acceder a los datos del service
+  constructor(private heroesService:HeroesService){}
+
+  //necesitamos cargar datos una vez abierta la pag
+  ngOnInit(): void {
+    //guardar los heroes del heroesService
+  this.heroesService.getHeroes()
+   .subscribe(heroes => this.heroes = heroes);
+  }
+}
